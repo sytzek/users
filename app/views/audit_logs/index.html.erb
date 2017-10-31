@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= "User #{@user.name} history" %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Time </th>
+      <th>Change</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @audit_logs.each do |audit_log| %>
+      <% audit_log.audited_changes.each_pair do |attribute,change| %>
+        <tr>
+          <td><%= audit_log.created_at %></td>
+          <td><%= "#{attribute} changed from #{change[0]} to #{change[1]}" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', users_path %>
